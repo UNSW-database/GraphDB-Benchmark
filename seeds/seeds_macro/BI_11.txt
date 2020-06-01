@@ -1,0 +1,2 @@
+country|blackList
+Germany|also;Pope;that;James;Henry;one;Green

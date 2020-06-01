@@ -1,0 +1,21 @@
+{
+  "license" : "./fma.lic",
+  "directory" : "./lgraph_db",
+  
+  "host" : "0.0.0.0",
+  "port" : 7071,
+  "enable_ha" : false,
+  
+  "enable_rpc" : true,
+  "rpc_port" : 9090,
+
+  "verbose" : 1,
+  "log_file" : "/var/log/lgraph.log",
+
+  "ssl_auth" : false,
+  "server_key" : "/usr/local/etc/lgraph/server-key.pem",
+  "server_cert" : "/usr/local/etc/lgraph/server-cert.pem",
+  "web" : "/usr/local/share/lgraph/resource",
+
+  "n_python_workers" : 1
+}

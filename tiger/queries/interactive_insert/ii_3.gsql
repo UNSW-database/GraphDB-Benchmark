@@ -1,0 +1,3 @@
+CREATE QUERY ii_3(UINT personId, UINT commentId, DATETIME creationDate) FOR GRAPH ldbc_snb {
+  INSERT INTO Person_LIKES_Comment (FROM, TO, creationDate) VALUES (personId Person, commentId Comment, creationDate);
+}

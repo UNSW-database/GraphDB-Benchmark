@@ -1,0 +1,7 @@
+CREATE QUERY id_7(VERTEX<Comment> commentId) FOR GRAPH ldbc_snb {
+
+  vComment = { commentId };
+  
+  DELETE c FROM vComment:c;
+
+}

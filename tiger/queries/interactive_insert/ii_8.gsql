@@ -1,0 +1,3 @@
+CREATE QUERY ii_8(UINT personId, UINT person2Id, DATETIME creationDate) FOR GRAPH ldbc_snb {
+  INSERT INTO Person_KNOWS_Person (FROM, TO, creationDate) VALUES (personId Person, person2Id Person, creationDate);
+}

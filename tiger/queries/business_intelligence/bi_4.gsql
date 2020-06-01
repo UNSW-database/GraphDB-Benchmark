@@ -1,0 +1,54 @@
+# Popular topics in a Country
+CREATE QUERY bi_4(STRING tagClassName, STRING countryName) FOR GRAPH ldbc_snb { 
+  TYPEDEF TUPLE <INT forumId, STRING forumTitle, DATETIME forumCreationDate, INT personId, INT postCount> INFO;
+
+  GroupByAccum<INT forumId, STRING forumTitle, DATETIME forumCreationDate, INT personId, SumAccum<INT> postCount> @@count;
+  HeapAccum<INFO>(20, postCount DESC, forumId ASC) @@result;
+  OrAccum @visited;
+  SumAccum<INT> @personId;
+
+  vStart(ANY) = { Country.* };
+  vStart = SELECT s
+    FROM vStart:s
+    WHERE s.name == countryName;
+    
+  vStart = SELECT t
+    FROM vStart:s-(City_IS_PART_OF_Country_REVERSE:e)->:t;
+
+  vStart = 
+    SELECT t
+    FROM vStart:s-(Person_IS_LOCATED_IN_City_REVERSE:e)->:t;
+
+  vForum = 
+    SELECT t
+    FROM vStart:s-(Forum_HAS_MODERATOR_Person_REVERSE:e)->:t
+    ACCUM 
+      t.@personId = s.id, # one Forum can only have one moderator
+      t.@visited = TRUE;
+          
+  vStart = { TagClass.* };
+  vStart = 
+    SELECT s
+    FROM vStart:s
+    WHERE s.name == tagClassName;
+
+  vStart = 
+    SELECT t
+    FROM vStart:s-(Tag_HAS_TYPE_TagClass_REVERSE:e)->:t;
+
+  vStart = 
+    SELECT t 
+    FROM vStart:s-(Post_HAS_TAG_Tag_REVERSE:e)->:t; 
+
+  vForum = 
+    SELECT t 
+    FROM vStart:s-(Forum_CONTAINER_OF_Post_REVERSE:e)->:t 
+    WHERE t.@visited == TRUE
+    ACCUM @@count += (t.id, t.title, t.creationDate, t.@personId -> 1);
+
+  FOREACH c IN @@count DO
+    @@result += INFO(c.forumId, c.forumTitle, c.forumCreationDate, c.personId, c.postCount);
+  END;
+
+  PRINT @@result;
+}

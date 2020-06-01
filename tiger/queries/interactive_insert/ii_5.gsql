@@ -1,0 +1,3 @@
+CREATE QUERY ii_5(UINT personId, UINT forumId, DATETIME joinDate) FOR GRAPH ldbc_snb {
+  INSERT INTO Forum_HAS_MEMBER_Person (FROM, TO, joinDate) VALUES (forumId Forum, personId Person, joinDate);
+}

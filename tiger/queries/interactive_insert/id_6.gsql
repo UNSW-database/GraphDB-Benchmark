@@ -1,0 +1,7 @@
+CREATE QUERY id_6(VERTEX<Post> postId) FOR GRAPH ldbc_snb {
+
+  vPost = { postId };
+  
+  DELETE p FROM vPost:p;
+
+}

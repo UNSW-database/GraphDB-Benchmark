@@ -1,0 +1,7 @@
+CREATE QUERY id_4(VERTEX<Forum> forumId) FOR GRAPH ldbc_snb {
+
+  vForum = { forumId };
+  
+  DELETE f FROM vForum:f;
+
+}

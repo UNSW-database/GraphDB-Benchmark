@@ -1,0 +1,2 @@
+date|tagClass1|tagClass2
+1970-01-01|MusicalArtist|OfficeHolder

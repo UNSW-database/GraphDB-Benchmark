@@ -1,0 +1,6 @@
+CREATE QUERY id_8(VERTEX<Person> personId, VERTEX<Person> person2Id) FOR GRAPH ldbc_snb {
+  
+  vPerson = { personId };
+  DELETE e FROM vPerson:s -(Person_KNOWS_Person:e)-> Person:t
+    WHERE t == person2Id;
+}

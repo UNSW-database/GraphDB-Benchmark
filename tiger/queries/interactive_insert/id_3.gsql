@@ -1,0 +1,6 @@
+CREATE QUERY id_3(VERTEX<Person> personId, VERTEX<Comment> commentId) FOR GRAPH ldbc_snb {
+  
+  vPerson = { personId };
+  DELETE e FROM vPerson:s -(Person_LIKES_Comment:e)-> Comment:t
+    WHERE t == commentId;
+}

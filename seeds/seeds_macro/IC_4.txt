@@ -1,0 +1,2 @@
+personId|startDate|durationDays
+21990232559429|2012-05-01 00:00:00|37

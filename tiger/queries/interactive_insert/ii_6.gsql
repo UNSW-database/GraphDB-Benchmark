@@ -1,0 +1,26 @@
+CREATE QUERY ii_6(UINT postId, STRING imageFile, DATETIME creationDate, STRING locationIP, STRING browserUsed, STRING language, STRING content, UINT length, UINT authorPersonId, UINT forumId, UINT countryId, set<UINT> tagIds) FOR GRAPH ldbc_snb {
+
+  IF content == "" THEN
+    IF imageFile == "" THEN
+      INSERT INTO Post (PRIMARY_ID, id, creationDate, locationIP, browserUsed, lang, length) VALUES (postId, postId, creationDate, locationIP, browserUsed, language, length);
+    ELSE
+      INSERT INTO Post (PRIMARY_ID, id, imageFile, creationDate, locationIP, browserUsed, lang, length) VALUES (postId, postId, imageFile, creationDate, locationIP, browserUsed, language, length);
+    END;
+  ELSE
+    IF imageFile == "" THEN
+      INSERT INTO Post (PRIMARY_ID, id, creationDate, locationIP, browserUsed, lang, content, length) VALUES (postId, postId, creationDate, locationIP, browserUsed, language, content, length);
+    ELSE
+      INSERT INTO Post (PRIMARY_ID, id, imageFile, creationDate, locationIP, browserUsed, lang, content, length) VALUES (postId, postId, imageFile, creationDate, locationIP, browserUsed, language, content, length);
+    END;
+  END;
+  
+  INSERT INTO Post_HAS_CREATOR_Person (FROM, TO) VALUES (postId Post, authorPersonId Person);
+  
+  INSERT INTO Forum_CONTAINER_OF_Post (FROM, TO) VALUES (forumId Forum, postId Post);
+
+  INSERT INTO Post_IS_LOCATED_IN_Country (FROM, TO) VALUES (postId Post, countryId Country);
+
+  FOREACH tagId IN tagIds DO
+    INSERT INTO Post_HAS_TAG_Tag (FROM, TO) VALUES (postId Post, tagId Tag);
+  END;
+}

@@ -1,0 +1,7 @@
+CREATE QUERY id_1(VERTEX<Person> personId) FOR GRAPH ldbc_snb {
+
+  vPerson = { personId };
+  
+  DELETE p FROM vPerson:p;
+
+}

@@ -1,0 +1,18 @@
+CREATE QUERY ii_7(UINT commentId, DATETIME creationDate, STRING locationIP, STRING browserUsed, STRING content, UINT length, UINT authorPersonId, UINT countryId, INT replyToPostId, INT replyToCommentId, set<UINT> tagIds) FOR GRAPH ldbc_snb {
+  
+  INSERT INTO Comment (PRIMARY_ID, id, creationDate, locationIP, browserUsed, content, length) VALUES (commentId, commentId, creationDate, locationIP, browserUsed, content, length);
+
+  INSERT INTO Comment_HAS_CREATOR_Person (FROM, TO) VALUES (commentId Comment, authorPersonId Person);
+  
+  IF replyToPostId != -1 THEN
+    INSERT INTO Comment_REPLY_OF_Post (FROM, TO) VALUES (commentId Comment, replyToPostId Post);
+  ELSE
+    INSERT INTO Comment_REPLY_OF_Comment (FROM, TO) VALUES (commentId Comment, replyToCommentId Comment);
+  END;
+  
+  INSERT INTO Comment_IS_LOCATED_IN_Country (FROM, TO) VALUES (commentId Comment, countryId Country);
+  
+  FOREACH tagId IN tagIds DO
+    INSERT INTO Comment_HAS_TAG_Tag (FROM, TO) VALUES (commentId Comment, tagId Tag);
+  END;
+}

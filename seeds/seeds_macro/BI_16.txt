@@ -1,0 +1,2 @@
+personId|country|tagClass|minPathDistance|maxPathDistance
+19791209310731|Pakistan|MusicalArtist|3|5

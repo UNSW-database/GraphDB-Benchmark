@@ -1,0 +1,2 @@
+startDate|endDate|country1Name|country2Name
+2008-03-18 00:80:53|2012-05-24 00:30:33|Spain|Germany

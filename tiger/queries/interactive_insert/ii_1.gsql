@@ -1,0 +1,21 @@
+CREATE QUERY ii_1(UINT personId, STRING personFirstName, STRING personLastName, STRING gender, DATETIME birthday, DATETIME creationDate, STRING locationIP, STRING browserUsed, UINT cityId, set<STRING> languages, set<STRING> emails , set<UINT> tagIds, set<UINT> studyAt, set<UINT> workAt) FOR GRAPH ldbc_snb {
+
+  INSERT INTO Person (PRIMARY_ID, id, firstName, lastName, gender, birthday, creationDate, locationIP, browserUsed, speaks, email) VALUES (personId, personId, personFirstName, personLastName, gender, birthday, creationDate, locationIP, browserUsed, languages, emails);
+  
+  INSERT INTO Person_IS_LOCATED_IN_City (FROM, TO) VALUES (personId Person, cityId City);
+  
+  FOREACH tagId IN tagIds DO
+    INSERT INTO Person_HAS_INTEREST_Tag (FROM, TO) VALUES (personId Person, tagId Tag);
+  END;
+  
+  #INT lenSA = studyAt.size();
+  FOREACH sid IN studyAt DO
+    INSERT INTO Person_STUDY_AT_University (FROM, TO, classYear) VALUES (personId Person, sid University, _);
+  END;
+  
+  #INT lenWA = workAt.size(),
+  FOREACH wid IN workAt DO
+    INSERT INTO Person_WORK_AT_Company (FROM, TO, workFrom) VALUES (personId Person, wid Company, _);
+  END;
+
+}

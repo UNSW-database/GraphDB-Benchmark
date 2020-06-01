@@ -1,0 +1,18 @@
+SET graph_path = ldbc_graph;
+CREATE UNIQUE PROPERTY INDEX ON Forum        (id);
+CREATE UNIQUE PROPERTY INDEX ON Message      (id);
+CREATE UNIQUE PROPERTY INDEX ON Post         (id);
+CREATE UNIQUE PROPERTY INDEX ON Comment    (id);
+CREATE UNIQUE PROPERTY INDEX ON Organisation (id);
+CREATE UNIQUE PROPERTY INDEX ON Person       (id);
+CREATE UNIQUE PROPERTY INDEX ON Place        (id);
+CREATE UNIQUE PROPERTY INDEX ON Tag          (id);
+CREATE UNIQUE PROPERTY INDEX ON TagClass     (id);
+CREATE PROPERTY INDEX ON Message   ( creationDate);
+CREATE PROPERTY INDEX ON Post      ( creationDate);
+CREATE PROPERTY INDEX ON Comment ( creationDate);
+CREATE PROPERTY INDEX ON Forum ( creationDate);
+CREATE PROPERTY INDEX ON Person (firstName);
+CREATE PROPERTY INDEX ON Place (name);
+CREATE PROPERTY INDEX ON Tag (name);
+CREATE PROPERTY INDEX ON TagClass (name);

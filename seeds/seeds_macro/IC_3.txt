@@ -1,0 +1,2 @@
+personId|startDate|duration|countryX|countryY
+17592186055119|2012-05-01 00:00:00|42|Laos|Scotland
