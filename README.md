@@ -22,7 +22,7 @@ We conducted all experiments on a single machine with *two 20-core processors In
 
 ## Publication
 
-Ran Wang, Zhengyi Yang, Wenjie Zhang, and Xuemin Lin. "An Empirical Study on Recent Graph Database Systems". The 13th International Conference on Knowledge Science, Engineering and Management (KSEM 2020).
+Ran Wang, Zhengyi Yang, Wenjie Zhang, and Xuemin Lin. "[An Empirical Study on Recent Graph Database Systems](https://link.springer.com/chapter/10.1007/978-3-030-55130-8_29)". The 13th International Conference on Knowledge Science, Engineering and Management (KSEM 2020).
 
 ## Issues
 
