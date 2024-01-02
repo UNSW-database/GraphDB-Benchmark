@@ -134,14 +134,14 @@ Before loading new data, you can backup the loaded data and rollback when use th
 
 ```
 backup: cp -r graph.db graph.db.bak
-rollback: rm -r graph.db; cp -r graph.db.bak lgraph.db
+rollback: rm -r graph.db; cp -r graph.db.bak graph.db
 ```
 
 Convert data and load data:
 
 ```
 ./convert-data.sh
-./dalete-neo4j-database.sh
+./delete-neo4j-database.sh
 ./import-to-neo4j.sh
 ./restart-neo4j .sh
 ```
